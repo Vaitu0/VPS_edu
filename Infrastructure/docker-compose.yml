@@ -1,6 +1,19 @@
 version: '3.8'
 
 services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx
+    image: nginx-image:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    restart: unless-stopped
+
   grafana:
     build:
       context: ./grafana
